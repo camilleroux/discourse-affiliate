@@ -12,7 +12,7 @@ function ldlc(text, helper) {
 
 function captaincontrat(text, helper) {
   const tag = helper.getOptions().tags["captaincontrat.com"];
-  return tag ? text.replace(CAPTAIN_CONTRAT_REGEX, href => `${href}?utm_medium=${tag}`) : text;
+  return tag ? text.replace(CAPTAIN_CONTRAT_REGEX, href => `${href}?${tag}`) : text;
 }
 
 function amazon(text, helper) {
