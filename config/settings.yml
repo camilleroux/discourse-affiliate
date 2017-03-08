@@ -48,3 +48,6 @@ plugins:
     default: ''
     client: true
     regex: "^[a-zA-Z0-9]+$"
+  affiliate_captaincontrat_com:
+    default: ''
+    client: true

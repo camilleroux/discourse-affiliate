@@ -1,5 +1,6 @@
 import { registerOption } from 'pretty-text/pretty-text';
 
+const CAPTAIN_CONTRAT_REGEX = /((?:https?:)?(?:\/\/)?(?:www\.)?captaincontrat\.[^\b\s"'<>\(\)\[\]]+)/ig;
 const LDLC_LINK_REGEX = /((?:https?:)?(?:\/\/)?(?:www\.)?ldlc\.[^\b\s"'<>\(\)\[\]]+)/ig;
 const AMAZON_DOMAINS = ["amazon.ca", "amazon.cn", "amazon.co.jp", "amazon.co.uk", "amazon.com", "amazon.com.au", "amazon.com.br", "amazon.com.mx", "amazon.de", "amazon.es", "amazon.fr", "amazon.in", "amazon.it", "amazon.nl"];
 const AMAZON_ASIN_REGEX = /\/([A-Z0-9]{10})(?:[\?\/%]|$)/i;
@@ -7,6 +8,11 @@ const AMAZON_ASIN_REGEX = /\/([A-Z0-9]{10})(?:[\?\/%]|$)/i;
 function ldlc(text, helper) {
   const tag = helper.getOptions().tags["ldlc.com"];
   return tag ? text.replace(LDLC_LINK_REGEX, href => `${href}#${tag}`) : text;
+}
+
+function captaincontrat(text, helper) {
+  const tag = helper.getOptions().tags["captaincontrat.com"];
+  return tag ? text.replace(CAPTAIN_CONTRAT_REGEX, href => `${href}?utm_medium=${tag}`) : text;
 }
 
 function amazon(text, helper) {
@@ -51,4 +57,5 @@ registerOption((siteSettings, opts) => {
 export function setup(helper) {
   helper.addPreProcessor(text => amazon(text, helper));
   helper.addPreProcessor(text => ldlc(text, helper));
+  helper.addPreProcessor(text => captaincontrat(text, helper));
 }
