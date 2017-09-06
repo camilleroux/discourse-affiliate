@@ -46,6 +46,19 @@ class AffiliateProcessor
     rules['www.ldlc.com'] = rule
     rules['ldlc.com'] = rule
 
+    rule = lambda do |url, uri|
+      code = SiteSetting.affiliate_captaincontrat_com
+      if code.present?
+        uri.query = code
+        uri.to_s
+      else
+        url
+      end
+    end
+
+    rules['www.captaincontrat.com'] = rule
+    rules['captaincontrat.com'] = rule
+
     @rules = rules
   end
 
