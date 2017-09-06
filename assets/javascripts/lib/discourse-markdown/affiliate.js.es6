@@ -55,7 +55,10 @@ registerOption((siteSettings, opts) => {
 });
 
 export function setup(helper) {
-  helper.addPreProcessor(text => amazon(text, helper));
-  helper.addPreProcessor(text => ldlc(text, helper));
-  helper.addPreProcessor(text => captaincontrat(text, helper));
+  // no longer using this once we move to markdown it
+  if (!helper.markdownIt) {
+    helper.addPreProcessor(text => amazon(text, helper));
+    helper.addPreProcessor(text => ldlc(text, helper));
+    helper.addPreProcessor(text => captaincontrat(text, helper));
+  }
 }
